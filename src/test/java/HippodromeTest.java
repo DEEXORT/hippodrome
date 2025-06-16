@@ -13,14 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HippodromeTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void constructor_ShouldThrowExceptionWhenInputIsNull() {
         Exception exceptionNull = assertThrows(IllegalArgumentException.class, () -> new Hippodrome(null));
@@ -67,7 +59,7 @@ class HippodromeTest {
 
         //then
         for (Horse horse : horseList) {
-            Mockito.verify(horse, Mockito.only()).move();
+            Mockito.verify(horse, Mockito.times(1)).move();
         }
     }
 
@@ -88,5 +80,8 @@ class HippodromeTest {
 
         //then
         assertEquals(4, winner.getDistance());
+        for (Horse horse : horseList) {
+            Mockito.verify(horse, Mockito.times(1)).getDistance();
+        }
     }
 }
