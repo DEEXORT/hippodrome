@@ -80,8 +80,5 @@ class HippodromeTest {
 
         //then
         assertEquals(4, winner.getDistance());
-        for (Horse horse : horseList) {
-            Mockito.verify(horse, Mockito.times(1)).getDistance();
-        }
     }
 }

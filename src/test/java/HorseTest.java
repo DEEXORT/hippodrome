@@ -52,10 +52,10 @@ class HorseTest {
         assertEquals(expectedName, actualName);
     }
 
-    @Test
-    void getSpeed() {
+    @ParameterizedTest
+    @ValueSource(doubles = {0.0, 7.2, 2.9})
+    void getSpeed(Double expectedSpeed) {
         //given
-        double expectedSpeed = 5.0;
         Horse horse = new Horse("Koni", expectedSpeed, 5.0);
 
         //when
@@ -65,10 +65,10 @@ class HorseTest {
         assertEquals(expectedSpeed, actualSpeed, 0.0001);
     }
 
-    @Test
-    void getDistance() {
+    @ParameterizedTest
+    @ValueSource(doubles = {0.0, 5.0, 1000.0})
+    void getDistance(Double expectedDistance) {
         //given
-        double expectedDistance = 5.0;
         Horse horse = new Horse("Koni", 5.0, expectedDistance);
 
         //when
@@ -79,7 +79,7 @@ class HorseTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {0.4, 0.6, 0.2})
+    @ValueSource(doubles = {0.4, 0.6, 0.2, 0.9})
     void move(Double randomValue) {
         //given
         MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class);
