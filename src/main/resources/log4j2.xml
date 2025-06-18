@@ -4,13 +4,28 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File name="File" fileName="logs/hippodrome.log" append="false">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %level %logger{36}: %msg%n"/>
-        </File>
+        <RollingFile name="RollingFile" fileName="logs/hippodrome.log" filePattern="logs/hippodrome.%d{yyyy-MM-dd-HH-mm-ss}">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="30"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="logs" maxDepth="2">
+                    <IfFileName glob="hippodrome*"/>
+                    <IfLastModified age="10S"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="Main" level="INFO" additivity="false">
-            <AppenderRef ref="File"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Logger name="Horse" level="INFO" additivity="false">
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Logger name="Hippodrome" level="INFO" additivity="false">
+            <AppenderRef ref="RollingFile"/>
         </Logger>
         <Root level="error">
             <AppenderRef ref="Console"/>
