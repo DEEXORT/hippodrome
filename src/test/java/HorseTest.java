@@ -40,6 +40,17 @@ class HorseTest {
     }
 
     @Test
+    void constructor_ShouldSetDistanceToZeroWhenNotProvided() {
+        Horse horse = new Horse("Koni", 5.0);
+        assertEquals(0, horse.getDistance(), 0.001);
+    }
+
+    @Test
+    void constructor_ShouldAcceptZeroSpeedAndDistance() {
+        assertDoesNotThrow(() -> {new Horse("Koni", 0, 0);});
+    }
+
+    @Test
     void getName() {
         //given
         String expectedName = "Koni";

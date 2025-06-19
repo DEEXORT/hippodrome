@@ -1,6 +1,7 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -29,10 +30,6 @@ public class Main {
         String winnerName = hippodrome.getWinner().getName();
         logger.info("Окончание скачек. Победитель: {}", winnerName);
         System.out.println(winnerName + " wins!");
-
-        // Проверка на логи
-        logger.info("Проверка на логгирование");
-        try {Horse testHorse = new Horse("TestHorse", -5);} catch (Exception ignored) {}
     }
 
     private static void watch(Hippodrome hippodrome) throws Exception {
